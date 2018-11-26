@@ -81,6 +81,7 @@ function updateToolTip(chosenXAxis, circlesGroup) {
   circlesGroup.call(toolTip);
 
   circlesGroup.on("mouseover", function(data) {
+  	console.log(data);
     toolTip.show(data);
   })
     // onmouseout event
@@ -93,8 +94,9 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
 // Retrieve data from the CSV file and execute everything below
 // d3.csv("assets/data/data.csv", function(err, data) {
-d3.csv("assets/data/data.csv").then(function(err, data) {
-  if (err) throw err;
+// d3.csv("assets/data/data.csv").then(function(err, data) {
+d3.csv("assets/data/data.csv").then(function(data) {
+  // if (err) throw err;
 
   // parse data
   data.forEach(function(data) {
@@ -102,7 +104,7 @@ d3.csv("assets/data/data.csv").then(function(err, data) {
     data["healthcare"] = +data["healthcare"];
   });
 
-  console.log(data);
+  //console.log(data);
 
   // xLinearScale function above csv import
   var xLinearScale = xScale(data, chosenXAxis);
@@ -133,9 +135,9 @@ d3.csv("assets/data/data.csv").then(function(err, data) {
     .append("circle")
     .attr("cx", d => xLinearScale(d[chosenXAxis]))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("r", 20)
+    .attr("r", 10)
     .attr("fill", "blue")
-    .attr("opacity", ".5");
+    .attr("opacity", "0.8");
 
   // Create group for  2 x- axis labels
   var labelsGroup = chartGroup.append("g")
